@@ -58,16 +58,16 @@ export const constantRoutes = [
   {
     path: '/system',
     component: Layout,
-    redirect: '/system/table',
+    redirect: '/system/customer',
     name: '系统管理',
     meta: { title: '系统管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: '用户',
-        component: () => import('@/views/table/index'),
-        meta: { title: '用户', icon: 'table' }
-      },{
+        path: 'user',
+        name: '客户',
+        component: () => import('@/views/customer/index'),
+        meta: { title: '客户', icon: 'customer' }
+      }, {
         path: 'table',
         name: '充值历史',
         component: () => import('@/views/table/index'),
