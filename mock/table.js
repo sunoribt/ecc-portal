@@ -13,7 +13,7 @@ const data = Mock.mock({
 
 module.exports = [
   {
-    url: '/ecc-portal/table/list',
+    url: '/ecc-portal/customer',
     type: 'get',
     response: config => {
       const items = data.items
