@@ -63,7 +63,7 @@ export const constantRoutes = [
     meta: { title: '系统管理', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'user',
+        path: 'customer',
         name: '客户',
         component: () => import('@/views/customer/index'),
         meta: { title: '客户', icon: 'customer' }

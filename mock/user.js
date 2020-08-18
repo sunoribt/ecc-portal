@@ -26,7 +26,7 @@ const users = {
 module.exports = [
   // user login
   {
-    url: '/ecc-portal/user/login',
+    url: '/ecc/user/login',
     type: 'post',
     response: config => {
       const { username } = config.body
@@ -49,7 +49,7 @@ module.exports = [
 
   // get user info
   {
-    url: '/ecc-portal/user/info\.*',
+    url: '/ecc/user/info\.*',
     type: 'get',
     response: config => {
       const { token } = config.query
@@ -72,7 +72,7 @@ module.exports = [
 
   // user logout
   {
-    url: '/ecc-portal/user/logout',
+    url: '/ecc/user/logout',
     type: 'post',
     response: _ => {
       return {
