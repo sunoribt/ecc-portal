@@ -15,6 +15,7 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
+    console.info('---->' + store.getters.token)
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
@@ -35,7 +36,7 @@ service.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status
    * Please return  response => response
-  */
+   */
 
   /**
    * Determine the request status by custom code
