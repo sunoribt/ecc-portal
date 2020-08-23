@@ -17,7 +17,7 @@ export function get(id) {
 
 export function getList(params) {
   return request({
-    url: '/customer',
+    url: '/user',
     method: 'get',
     params
   })
