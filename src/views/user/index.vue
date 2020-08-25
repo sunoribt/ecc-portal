@@ -1,5 +1,20 @@
 <template>
   <div class="app-container">
+
+    <el-dialog
+      append-to-body
+      :close-on-click-modal="false"
+      :visible.sync="deleteDialog"
+      :title="dialogTitle"
+      width="570px"
+    >
+      <span>确认删除用户吗?   {{ currentRow.fullName }}</span>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="text" @click="cancelCU">取消</el-button>
+        <el-button type="primary" @click="submitCU">确认</el-button>
+      </div>
+    </el-dialog>
+
     <el-dialog
       append-to-body
       :close-on-click-modal="false"
@@ -12,24 +27,22 @@
           <el-input v-model="form.userName" />
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="form.password" type="password" placeholder="请输入新密码">
-            <i
-              slot="suffix"
-              title="显示密码"
-              style="cursor:pointer;"
-              class="iconfont icon-xianshizy"
-              @click="changePass('show')"
-            />
-          </el-input>
+          <el-input v-model="form.password" placeholder="请输入新密码" />
         </el-form-item>
         <el-form-item label="全称" prop="fullName">
           <el-input v-model="form.fullName" />
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input v-model.number="form.phone" />
+          <el-input v-model="form.phone" />
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model.number="form.email" />
+          <el-input v-model="form.email" />
+        </el-form-item>
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="form.status" placeholder="请选择">
+            <el-option value="1" label="激活" />
+            <el-option value="0" label="停用" />
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -46,10 +59,12 @@
       </el-row>
       <el-table
         class="user-table"
+        highlight-current-row
         :data="list"
         border
+        @current-change="handleCurrentChange"
       >
-        <el-table-column type="selection" width="55" />
+        <el-table-column type="index" width="55" />
         <el-table-column :show-overflow-tooltip="true" prop="fullName" label="客户名称" />
         <el-table-column :show-overflow-tooltip="true" prop="code" label="客户代码" />
         <el-table-column :show-overflow-tooltip="true" prop="money" label="余额" />
@@ -67,26 +82,15 @@
 </template>
 
 <script>
-import { getList } from '@/api/customer'
-import { isvalidPhone } from '@/utils/validate'
+import { getList, addUser, updateUser, deleteUser } from '@/api/user'
 
 export default {
   name: 'User',
   data() {
-    // 自定义验证
-    const validPhone = (rule, value, callback) => {
-      if (!value) {
-        callback(new Error('请输入电话号码'))
-      } else if (!isvalidPhone(value)) {
-        callback(new Error('请输入正确的11位手机号码'))
-      } else {
-        callback()
-      }
-    }
-
     return {
       dialogTitle: '新增用户',
       createOrUpdateDialog: false,
+      deleteDialog: false,
       list: null,
       form: {
         userName: '',
@@ -96,29 +100,30 @@ export default {
         email: ''
       },
       passwordVisible: true,
-      crud: 1,
+      crud: 1, // 1:create 2:read 3:update 4:delete
       rules: {
         userName: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
+          { min: 4, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ],
         fullName: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
+          { required: true, message: '请输入全称', trigger: 'blur' },
+          { min: 4, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ],
         email: [
           { required: true, message: '请输入邮箱地址', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
         ],
         phone: [
-          { required: true, trigger: 'blur', validator: validPhone },
-          { min: 11, max: 11, message: '请输入11位数的手机号', trigger: 'blur' }
+          { required: true, message: '请输入手机号', trigger: 'blur' },
+          { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ]
-      }
+      },
+      currentRow: {}
     }
   },
   created() {
@@ -132,34 +137,71 @@ export default {
       })
     },
     createUser() {
+      this.resetDialogData()
       this.dialogTitle = '新增用户'
       this.createOrUpdateDialog = true
-      console.info('create user ...')
+      this.crud = 1
     },
     updateUser() {
+      if (this.currentRow == null || Object.keys(this.currentRow).length === 0) {
+        this.$message('请选择用户')
+        return
+      }
+      this.crud = 3
+      this.form = this.currentRow
       this.dialogTitle = '修改用户'
       this.createOrUpdateDialog = true
-      console.info('update user..')
     },
     deleteUser() {
-      console.info('delete user..')
+      if (this.currentRow == null || Object.keys(this.currentRow).length === 0) {
+        this.$message('请选择用户')
+        return
+      }
+      this.crud = 2
+      this.dialogTitle = '删除用户'
+      this.deleteDialog = true
     },
     cancelCU() {
       this.createOrUpdateDialog = false
-      console.info('cancel create or update user.')
+      this.deleteDialog = false
     },
     submitCU() {
       if (this.crud === 1) {
-        this.$store.dispatch('user', this.form).then(() => {
-          console.info('create user success.')
-        }).catch(() => {
-          console.error('create user failed..')
+        addUser(this.form).then(resp => {
+          this.fetchData()
+          this.createOrUpdateDialog = false
+        }).catch(error => {
+          console.info(error)
+        })
+      } else if (this.crud === 3) {
+        updateUser(this.form).then(resp => {
+          this.fetchData()
+          this.createOrUpdateDialog = false
+        }).catch(error => {
+          console.error(error)
+        })
+      } else if (this.crud === 2) {
+        deleteUser(this.currentRow.id).then(resp => {
+          this.fetchData()
+          this.deleteDialog = false
+          this.currentRow = {}
+        }).catch(err => {
+          this.deleteDialog = false
+          this.currentRow = {}
+          console.error(err)
         })
       }
       console.info('submit create or update user')
     },
     changePass(value) {
       this.passwordVisible = !(value === 'show')
+    },
+    resetDialogData() {
+      this.form = {}
+    },
+    handleCurrentChange(val) {
+      console.info('current row change...')
+      this.currentRow = val
     }
   }
 }
