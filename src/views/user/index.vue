@@ -76,7 +76,15 @@
         </el-table-column>
         <el-table-column :show-overflow-tooltip="true" prop="createTime" label="创建时间" />
       </el-table>
-      <el-pagination />
+      <!--      <el-pagination-->
+      <!--        :page-size.sync="page.size"-->
+      <!--        :total="page.total"-->
+      <!--        :current-page.sync="page.page"-->
+      <!--        style="margin-top: 8px;"-->
+      <!--        layout="total, sizes, prev, pager, next, jumper"-->
+      <!--        @size-change="crud.sizeChangeHandler($event)"-->
+      <!--        @current-change="crud.pageChangeHandler"-->
+      <!--      />-->
     </div>
   </div>
 </template>
@@ -92,6 +100,11 @@ export default {
       createOrUpdateDialog: false,
       deleteDialog: false,
       list: null,
+      page: {
+        total: 50,
+        size: 20,
+        page: 1
+      },
       form: {
         userName: '',
         password: '',
@@ -202,6 +215,15 @@ export default {
     handleCurrentChange(val) {
       console.info('current row change...')
       this.currentRow = val
+    },
+    // 当前页改变
+    pageChangeHandler(e) {
+      this.page = e
+    },
+    // 每页条数改变
+    sizeChangeHandler(e) {
+      this.page.size = e
+      this.page.page = 1
     }
   }
 }

@@ -67,9 +67,9 @@ export const constantRoutes = [
         component: () => import('@/views/user/index'),
         meta: { title: '客户', icon: 'user' }
       }, {
-        path: 'auth',
+        path: 'ip',
         name: 'IP授权',
-        component: () => import('@/views/table/index'),
+        component: () => import('@/views/user/ip/index'),
         meta: { title: 'IP授权', icon: 'el-icon-s-check' }
       }, {
         path: 'account',
