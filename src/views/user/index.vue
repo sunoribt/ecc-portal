@@ -55,6 +55,7 @@
       <el-row class="el-button-group">
         <el-button type="success" @click="createUser">新增</el-button>
         <el-button type="success" @click="updateUser">修改</el-button>
+        <el-button type="success" @click="recharge">充值</el-button>
         <el-button type="danger" @click="deleteUser">删除</el-button>
       </el-row>
       <el-table
