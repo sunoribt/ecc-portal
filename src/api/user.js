@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/user/login',
+    url: '/bg/loginByPassword',
     method: 'post',
     data
   })
@@ -10,21 +10,21 @@ export function login(data) {
 
 export function getInfo() {
   return request({
-    url: '/user/info',
+    url: '/bg/info',
     method: 'get'
   })
 }
 
 export function logout() {
   return request({
-    url: '/user/logout',
+    url: '/bg/logout',
     method: 'post'
   })
 }
 
 export function getList(params) {
   return request({
-    url: '/user',
+    url: '/bg',
     method: 'get',
     params
   })
@@ -32,7 +32,7 @@ export function getList(params) {
 
 export function addUser(data) {
   return request({
-    url: '/user',
+    url: '/bg',
     method: 'post',
     data
   })
@@ -40,7 +40,7 @@ export function addUser(data) {
 
 export function updateUser(data) {
   return request({
-    url: '/user',
+    url: '/bg',
     method: 'put',
     data
   })
@@ -48,7 +48,7 @@ export function updateUser(data) {
 
 export function deleteUser(userId) {
   return request({
-    url: '/user/' + userId,
+    url: '/bg/' + userId,
     method: 'delete'
   })
 }

@@ -37,11 +37,11 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/bg': {
+      '/ecc': {
         target: 'http://192.168.0.102:8080',
         changOrigin: true,
         pathRewrite: {
-          '^/ecc': '/bg'
+          '^/ecc': '/ecc'
         }
       }
     }
