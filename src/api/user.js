@@ -24,7 +24,7 @@ export function logout() {
 
 export function getList(params) {
   return request({
-    url: '/bg',
+    url: '/bg/user',
     method: 'get',
     params
   })
@@ -32,7 +32,7 @@ export function getList(params) {
 
 export function addUser(data) {
   return request({
-    url: '/bg',
+    url: '/bg/user',
     method: 'post',
     data
   })
@@ -40,7 +40,7 @@ export function addUser(data) {
 
 export function updateUser(data) {
   return request({
-    url: '/bg',
+    url: '/bg/user',
     method: 'put',
     data
   })

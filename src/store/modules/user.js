@@ -69,8 +69,8 @@ const actions = {
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(response => {
-        const { code, data } = response
-        if (code === 'success' && data) {
+        const { code } = response
+        if (code === '0') {
           removeToken() // must remove  token  first
           resetRouter()
           commit('RESET_STATE')

@@ -8,7 +8,7 @@
       :title="dialogTitle"
       width="570px"
     >
-      <span>确认删除用户吗?   {{ currentRow.fullName }}</span>
+      <span>确认删除用户吗?   {{ currentRow.userName }}</span>
       <div slot="footer" class="dialog-footer">
         <el-button type="text" @click="cancelCU">取消</el-button>
         <el-button type="primary" @click="submitCU">确认</el-button>
@@ -29,8 +29,8 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入新密码" />
         </el-form-item>
-        <el-form-item label="全称" prop="fullName">
-          <el-input v-model="form.fullName" />
+        <el-form-item label="全称" prop="userName">
+          <el-input v-model="form.userName" />
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="form.phone" />
@@ -66,9 +66,9 @@
         @current-change="handleCurrentChange"
       >
         <el-table-column type="index" width="55" />
-        <el-table-column :show-overflow-tooltip="true" prop="fullName" label="客户名称" />
-        <el-table-column :show-overflow-tooltip="true" prop="code" label="客户代码" />
-        <el-table-column :show-overflow-tooltip="true" prop="money" label="余额" />
+        <el-table-column :show-overflow-tooltip="true" prop="userName" label="客户名称" />
+        <el-table-column :show-overflow-tooltip="true" prop="userCode" label="客户代码" />
+        <el-table-column :show-overflow-tooltip="true" prop="amount" label="余额" />
         <el-table-column :show-overflow-tooltip="true" prop="status" label="状态">
           <template slot-scope="scope">
             <span v-if="scope.row.status">正常</span>
@@ -107,16 +107,16 @@ export default {
         page: 1
       },
       form: {
-        userName: '',
+        userCode: '',
         password: '',
-        fullName: '',
+        userName: '',
         phone: '',
         email: ''
       },
       passwordVisible: true,
       crud: 1, // 1:create 2:read 3:update 4:delete
       rules: {
-        userName: [
+        userCode: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 4, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ],
@@ -124,7 +124,7 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ],
-        fullName: [
+        userName: [
           { required: true, message: '请输入全称', trigger: 'blur' },
           { min: 4, max: 30, message: '长度在 6 到 30 个字符', trigger: 'blur' }
         ],
