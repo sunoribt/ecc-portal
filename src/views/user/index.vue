@@ -29,9 +29,6 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" placeholder="请输入新密码" />
         </el-form-item>
-        <el-form-item label="全称" prop="userName">
-          <el-input v-model="form.userName" />
-        </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="form.phone" />
         </el-form-item>
@@ -91,7 +88,7 @@
 </template>
 
 <script>
-import { getList, addUser, updateUser, deleteUser } from '@/api/user'
+import { addUser, deleteUser, getList, updateUser } from '@/api/user'
 
 export default {
   name: 'User',
@@ -145,9 +142,12 @@ export default {
   },
   methods: {
     fetchData() {
-      console.info('fetchData...')
+      console.info('fetch data...')
       getList().then(response => {
+        console.log('user list=' + response)
         this.list = response.data
+      }).catch(t => {
+        console.error(t)
       })
     },
     createUser() {
@@ -175,6 +175,10 @@ export default {
       this.dialogTitle = '删除用户'
       this.deleteDialog = true
     },
+    recharge() {
+      console.log('todo...')
+    },
+
     cancelCU() {
       this.createOrUpdateDialog = false
       this.deleteDialog = false
@@ -231,12 +235,12 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-::v-deep .vue-treeselect__control, ::v-deep .vue-treeselect__placeholder, ::v-deep .vue-treeselect__single-value {
-  height: 30px;
-  line-height: 30px;
-}
+  ::v-deep .vue-treeselect__control, ::v-deep .vue-treeselect__placeholder, ::v-deep .vue-treeselect__single-value {
+    height: 30px;
+    line-height: 30px;
+  }
 
-.user-table {
-  margin-top: 10px;
-}
+  .user-table {
+    margin-top: 10px;
+  }
 </style>
