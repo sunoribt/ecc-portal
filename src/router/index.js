@@ -80,6 +80,33 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/trade',
+    name: '交易信息',
+    component: Layout,
+    redirect: '/trade/dayReport',
+    meta: { title: '交易信息', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'dayReport',
+        name: '日报表',
+        component: () => import('@/views/trade/day/index'),
+        meta: { title: '日报表', icon: 'table' }
+      },
+      {
+        path: 'monthReport',
+        name: '月报表',
+        component: () => import('@/views/trade/month/index'),
+        meta: { title: '月报表', icon: 'table' }
+      },
+      {
+        path: 'detail',
+        name: '交易明细',
+        component: () => import('@/views/trade/day/index'),
+        meta: { title: '交易明细', icon: 'table' }
+      }
+    ]
+  },
+  {
     path: '/product',
     component: Layout,
     redirect: '/product/api',
@@ -137,26 +164,6 @@ export const constantRoutes = [
         name: '充值历史',
         component: () => import('@/views/user/index'),
         meta: { title: '充值', icon: 'table' }
-      }
-    ]
-  }, {
-    path: '/history',
-    name: '交易记录',
-    component: Layout,
-    redirect: '/history/detail',
-    meta: { title: '请求记录', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'detail',
-        name: '请求日志',
-        component: () => import('@/views/user/index'),
-        meta: { title: '请求日志', icon: 'table' }
-      },
-      {
-        path: 'test',
-        name: '请求记录',
-        component: () => import('@/views/user/index'),
-        meta: { title: '请求记录', icon: 'table' }
       }
     ]
   },
