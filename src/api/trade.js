@@ -15,3 +15,11 @@ export function monthReport(data) {
     data
   })
 }
+
+export function detailTrade(data) {
+  return request({
+    url: '/bg/user/report/detail',
+    method: 'post',
+    data
+  })
+}

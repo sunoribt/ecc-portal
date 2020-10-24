@@ -9,7 +9,7 @@
           <div class="card-panel-text">
             总次数
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="report.total" :duration="loadDuration" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -22,7 +22,7 @@
           <div class="card-panel-text">
             成功次数
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="report.success" :duration="loadDuration" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -35,7 +35,7 @@
           <div class="card-panel-text">
             失败次数
           </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="report.failed" :duration="loadDuration" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -48,7 +48,7 @@
           <div class="card-panel-text">
             利润
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="report.profit" :duration="loadDuration" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -66,7 +66,14 @@ export default {
   },
   data() {
     return {
-      newVisitis: 1
+      loadDuration: 2000,
+      newVisitis: 1,
+      report: {
+        total: 10000,
+        success: 9900,
+        failed: 100,
+        profit: 1100
+      }
     }
   },
   computed: {

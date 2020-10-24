@@ -66,17 +66,18 @@ export const constantRoutes = [
         name: '客户',
         component: () => import('@/views/user/index'),
         meta: { title: '客户', icon: 'user' }
-      }, {
-        path: 'ip',
-        name: 'IP授权',
-        component: () => import('@/views/user/ip/index'),
-        meta: { title: 'IP授权', icon: 'el-icon-s-check' }
-      }, {
-        path: 'account',
-        name: '账号设置',
-        component: () => import('@/views/table/index'),
-        meta: { title: '账号设置', icon: 'el-icon-setting' }
       }
+      // }, {
+      //   path: 'ip',
+      //   name: 'IP授权',
+      //   component: () => import('@/views/user/ip/index'),
+      //   meta: { title: 'IP授权', icon: 'el-icon-s-check' }
+      // }, {
+      //   path: 'account',
+      //   name: '账号设置',
+      //   component: () => import('@/views/table/index'),
+      //   meta: { title: '账号设置', icon: 'el-icon-setting' }
+      // }
     ]
   },
   {
@@ -84,25 +85,25 @@ export const constantRoutes = [
     name: '交易信息',
     component: Layout,
     redirect: '/trade/dayReport',
-    meta: { title: '交易信息', icon: 'el-icon-s-help' },
+    meta: { title: '交易信息', icon: 'el-icon-s-flag' },
     children: [
       {
         path: 'dayReport',
         name: '日报表',
         component: () => import('@/views/trade/day/index'),
-        meta: { title: '日报表', icon: 'table' }
+        meta: { title: '日报表', icon: 'el-icon-s-marketing' }
       },
       {
         path: 'monthReport',
         name: '月报表',
         component: () => import('@/views/trade/month/index'),
-        meta: { title: '月报表', icon: 'table' }
+        meta: { title: '月报表', icon: 'el-icon-s-marketing' }
       },
       {
         path: 'detail',
         name: '交易明细',
-        component: () => import('@/views/trade/day/index'),
-        meta: { title: '交易明细', icon: 'table' }
+        component: () => import('@/views/trade/detail/index'),
+        meta: { title: '交易明细', icon: 'el-icon-s-order' }
       }
     ]
   },
@@ -111,61 +112,21 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/product/api',
     name: '产品信息',
-    meta: { title: '产品信息', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'api',
-        name: '接口信息',
-        component: () => import('@/views/user/index'),
-        meta: { title: '接口信息', icon: 'api' }
-      }, {
-        path: 'config',
-        name: '配置',
-        component: () => import('@/views/table/index'),
-        meta: { title: '配置', icon: 'table' }
-      }
-    ]
+    meta: { title: '产品信息', icon: 'el-icon-s-help' }
   },
   {
     path: '/supplier',
     component: Layout,
     redirect: '/supplier/test1',
     name: '供应商管理',
-    meta: { title: '供应商管理', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'test1',
-        name: '供应商',
-        component: () => import('@/views/user/index'),
-        meta: { title: '供应商', icon: 'user' }
-      }, {
-        path: 'test2',
-        name: 'API接口',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'API接口', icon: 'table' }
-      }
-    ]
+    meta: { title: '供应商管理', icon: 'el-icon-s-help' }
   },
   {
     path: '/finance',
     name: '财务',
     component: Layout,
     redirect: '/finance/charge',
-    meta: { title: '财务', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'charge',
-        name: '充值',
-        component: () => import('@/views/user/index'),
-        meta: { title: '充值', icon: 'table' }
-      },
-      {
-        path: 'history',
-        name: '充值历史',
-        component: () => import('@/views/user/index'),
-        meta: { title: '充值', icon: 'table' }
-      }
-    ]
+    meta: { title: '财务', icon: 'el-icon-s-help' }
   },
 
   // 404 page must be placed at the end !!!
