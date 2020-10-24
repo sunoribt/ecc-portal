@@ -38,7 +38,7 @@ module.exports = {
     },
     proxy: {
       '/ecc': {
-        target: 'http://192.168.0.102:8080',
+        target: 'http://localhost:8080',
         changOrigin: true,
         pathRewrite: {
           '^/ecc': '/ecc'
