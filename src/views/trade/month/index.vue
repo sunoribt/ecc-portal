@@ -8,7 +8,7 @@
         start-placeholder="开始月份"
         end-placeholder="结束月份"
       />
-      <el-input v-model="searchCond.userCode" placeholder="客户名称" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="searchCond.userCode" placeholder="客户代码" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>

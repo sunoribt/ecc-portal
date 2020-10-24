@@ -10,7 +10,7 @@
       />
       <el-input
         v-model="searchCond.userCode"
-        placeholder="客户名称"
+        placeholder="客户代码"
         style="width: 200px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
