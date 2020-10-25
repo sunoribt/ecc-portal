@@ -85,13 +85,13 @@ export const constantRoutes = [
     name: '交易信息',
     component: Layout,
     redirect: '/trade/dayReport',
-    meta: { title: '交易信息', icon: 'el-icon-s-flag' },
+    meta: { title: '交易信息', icon: 'reportinfo' },
     children: [
       {
         path: 'dayReport',
         name: '日报表',
         component: () => import('@/views/trade/day/index'),
-        meta: { title: '日报表', icon: 'el-icon-s-marketing' }
+        meta: { title: '日报表', icon: 'callreport' }
       },
       {
         path: 'monthReport',
@@ -103,7 +103,7 @@ export const constantRoutes = [
         path: 'detail',
         name: '交易明细',
         component: () => import('@/views/trade/detail/index'),
-        meta: { title: '交易明细', icon: 'el-icon-s-order' }
+        meta: { title: '交易明细', icon: 'calldetail' }
       }
     ]
   },
